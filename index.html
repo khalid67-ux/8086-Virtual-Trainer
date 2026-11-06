@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MDA-8086 Virtual Trainer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>MDA-8086 Virtual Trainer</h1>
+  <p>VER 9.1 | Microprocessor Lab Simulator</p>
+</header>
+
+<div class="container">
+  <div class="toolbar">
+    <label for="lab"><b>Select Experiment:</b></label>
+    <select id="lab">
+      <option value="9">Lab 9 - Dot Matrix Display</option>
+      <option value="10">Lab 10 - Seven Segment Display</option>
+    </select>
+    <button id="resetBtn" class="danger">RESET</button>
+    <button id="clearBtn" class="gray">CLEAR MEMORY</button>
+  </div>
+
+  <div class="main">
+    <section class="panel">
+      <h2>8086 Trainer Keypad</h2>
+
+      <div class="display">
+        <div class="lcd-main">
+          <div class="lcd-heading">
+            <span>SEG : OFFSET</span>
+            <span>DATA</span>
+          </div>
+          <div class="lcd-values">
+            <span id="segDisplay">0000</span>
+            <span>:</span>
+            <span id="offsetDisplay">1000</span>
+            <span id="dataDisplay">FF</span>
+          </div>
+        </div>
+        <span class="status" id="mode">MONITOR</span>
+      </div>
+
+      <div class="keypad">
+        <button class="action" data-command="GO">GO</button>
+        <button class="action" data-command="STP">STP</button>
+        <button data-key="C">C</button>
+        <button data-key="D">D</button>
+        <button data-key="E">E</button>
+        <button data-key="F">F</button>
+
+        <button class="action" data-command="+">+</button>
+        <button class="action" data-command="REG">REG</button>
+        <button data-key="8">8</button>
+        <button data-key="9">9</button>
+        <button data-key="A">A</button>
+        <button data-key="B">B</button>
+
+        <button class="action" data-command="-">−</button>
+        <button class="action" data-command="DA">DA</button>
+        <button data-key="4">4</button>
+        <button data-key="5">5</button>
+        <button data-key="6">6</button>
+        <button data-key="7">7</button>
+
+        <button class="action" data-command="MON">MON</button>
+        <button class="action" data-command=":">:</button>
+        <button class="action" data-command="AD">AD</button>
+        <button data-key="0">0</button>
+        <button data-key="1">1</button>
+        <button data-key="2">2</button>
+
+        <button data-key="3">3</button>
+      </div>
+
+      <button id="clearInputBtn" class="gray">CLEAR INPUT</button>
+
+      <div class="info">
+        <b>Input Instructions</b><br>
+        1. AD → Segment → : → Offset.<br>
+        2. DA → Enter first machine-code byte.<br>
+        3. Press + to store the byte and move forward.<br>
+        4. Repeat for every byte.<br>
+        5. Press GO to execute the program.
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Program Memory</h2>
+
+      <div class="info">
+        <b>Starting Address:</b> <span id="startAddress">1000</span><br>
+        <b>Program Counter:</b> <span id="pc">1000</span><br>
+        <b>AL Register:</b> <span id="al">00</span><br>
+        <b>Execution:</b> <span id="executionStatus">Stopped</span>
+      </div>
+
+      <h3>Memory Contents</h3>
+
+      <div class="memory-actions">
+        <span id="selectedAddress">Selected: None</span>
+
+        <button id="deleteFromHereBtn" class="danger">
+          DELETE SELECTED BYTE
+        </button>
+      </div>
+
+      <div class="memory" id="memory">
+        No machine code entered.
+      </div>
+
+      <div class="runlog" id="log">
+        Ready. Select a lab and enter machine code.
+      </div>
+    </section>
+
+    <section class="panel hardware-panel">
+      <h2>Hardware Output Simulation</h2>
+
+      <div class="hardware">
+        <div class="device">
+          <h3>8 × 8 DOT MATRIX</h3>
+          <div class="matrix" id="matrix"></div>
+          <p id="matrixInfo">No output</p>
+          <small>Orange: Port A | Green: Port B</small>
+        </div>
+
+        <div class="device">
+          <h3>SEVEN SEGMENT DISPLAY</h3>
+          <div class="seven">
+            <div class="seg a" id="sa"></div>
+            <div class="seg b" id="sb"></div>
+            <div class="seg c" id="sc"></div>
+            <div class="seg d" id="sd"></div>
+            <div class="seg e" id="se"></div>
+            <div class="seg f" id="sf"></div>
+            <div class="seg g" id="sg"></div>
+          </div>
+          <p id="sevenInfo">No output</p>
+        </div>
+
+        <!-- FOUR LED SIMULATION - EXPERIMENT 10 -->
+        <div class="led-panel">
+
+          <h3>FOUR LED DISPLAY</h3>
+
+          <div class="led-container">
+
+            <div class="led-item">
+              <div class="led-bulb" id="led1"></div>
+              <span>LED 1</span>
+            </div>
+
+            <div class="led-item">
+              <div class="led-bulb" id="led2"></div>
+              <span>LED 2</span>
+            </div>
+
+            <div class="led-item">
+              <div class="led-bulb" id="led3"></div>
+              <span>LED 3</span>
+            </div>
+
+            <div class="led-item">
+              <div class="led-bulb" id="led4"></div>
+              <span>LED 4</span>
+            </div>
+
+          </div>
+
+          <p id="ledInfo">Port B: F0 | All LEDs OFF</p>
+
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
