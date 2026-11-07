@@ -493,3 +493,61 @@ button.green {
     font-size: 10px;
   }
 }
+
+
+/* Footer Design */
+
+.site-footer {
+    background: #142c50;
+    color: #dbeafe;
+    text-align: center;
+    padding: 25px 15px;
+    margin-top: 40px;
+    font-family: 'Inter', sans-serif;
+}
+
+.site-footer p {
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+.site-footer a {
+    color: #60a5fa;
+    font-weight: 700;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.site-footer a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.site-footer span {
+    font-size: 12px;
+    color: #b8c7dc;
+}
+
+@media (max-width: 600px) {
+    .site-footer {
+        padding: 20px 10px;
+    }
+
+    .site-footer span {
+        font-size: 11px;
+    }
+}
+
+.author-role {
+    color: #dbeafe;
+    font-weight: 500;
+}
+
+
+
+
+
+
+
+
+
